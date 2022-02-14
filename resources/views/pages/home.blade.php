@@ -3,5 +3,6 @@
 @section('content')
 
     Listato Videogames
+    <Videogame-component></Videogame-component>
     
 @endsection
