@@ -1933,6 +1933,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1942,11 +1943,32 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     user: String
   },
+  methods: {
+    eventDelete: function eventDelete(id) {
+      var _this = this;
+
+      axios.get("api/list/videogame/delete/".concat(id)).then(function (r) {
+        var ind = _this.getIndexById(id);
+
+        _this.videogames.splice(ind, 1);
+      })["catch"](function (e) {
+        return console.error(e);
+      });
+    },
+    getIndexById: function getIndexById(id) {
+      for (var x = 0; x < this.videogames.length; x++) {
+        var videogame = this.videogames[x];
+        if (videogame.id == id) return x;
+      }
+
+      return -1;
+    }
+  },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     axios.get('api/list/videogame').then(function (r) {
-      return _this.videogames = r.data;
+      return _this2.videogames = r.data;
     })["catch"](function (e) {
       return console.error(e);
     });
@@ -37568,11 +37590,13 @@ var render = function () {
             _vm.user
               ? _c("td", [
                   _c(
-                    "a",
+                    "button",
                     {
                       staticClass: "btn btn-danger",
-                      attrs: {
-                        href: "api/list/videogame/delete/" + videogame.id,
+                      on: {
+                        click: function ($event) {
+                          return _vm.eventDelete(videogame.id)
+                        },
                       },
                     },
                     [_vm._v("Delete")]

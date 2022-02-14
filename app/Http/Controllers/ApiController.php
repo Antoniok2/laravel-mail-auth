@@ -21,6 +21,6 @@ class ApiController extends Controller
 
         $videogame -> delete();
 
-        return redirect() -> route('home');
+        return json_encode($videogame);
     }
 }

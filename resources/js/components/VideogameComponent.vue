@@ -15,7 +15,8 @@
                     <td>{{ videogame.subtitle }}</td>
                     <td>{{ videogame.rating }}</td>
                     <td v-if="user">
-                        <a class="btn btn-danger" :href="`api/list/videogame/delete/${videogame.id}` ">Delete</a>
+                        <!-- <a class="btn btn-danger" :href="`api/list/videogame/delete/${videogame.id}` ">Delete</a> -->
+                        <button @click="eventDelete(videogame.id)" class="btn btn-danger">Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -33,6 +34,29 @@
         },
         props: {
             user: String
+        },
+        methods: {
+
+            eventDelete(id) {
+
+                axios.get(`api/list/videogame/delete/${id}`)
+                    .then(r => {
+                        const ind = this.getIndexById(id)
+                        this.videogames.splice(ind, 1);
+                    })
+                    .catch(e => console.error(e));
+            },
+
+            getIndexById(id) {
+                for (let x=0; x<this.videogames.length; x++) {
+                    const videogame = this.videogames[x];
+
+                    if(videogame.id == id)
+                        return x;   
+                }
+
+                return -1;
+            }
         },
         mounted() {
             
