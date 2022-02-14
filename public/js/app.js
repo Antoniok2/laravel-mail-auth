@@ -1931,6 +1931,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37563,7 +37565,20 @@ var render = function () {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(videogame.rating))]),
             _vm._v(" "),
-            _vm.user ? _c("td", [_vm._v("AZIONE")]) : _vm._e(),
+            _vm.user
+              ? _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: {
+                        href: "api/list/videogame/delete/" + videogame.id,
+                      },
+                    },
+                    [_vm._v("Delete")]
+                  ),
+                ])
+              : _vm._e(),
           ])
         }),
         0

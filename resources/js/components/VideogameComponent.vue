@@ -14,7 +14,9 @@
                     <td>{{ videogame.title }}</td>
                     <td>{{ videogame.subtitle }}</td>
                     <td>{{ videogame.rating }}</td>
-                    <td v-if="user">AZIONE</td>
+                    <td v-if="user">
+                        <a class="btn btn-danger" :href="`api/list/videogame/delete/${videogame.id}` ">Delete</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
