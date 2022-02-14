@@ -2,7 +2,7 @@
 
 @section('content')
 
-    Listato Videogames
-    <Videogame-component></Videogame-component>
+    <h1>Listato Videogames</h1>
+    <Videogame-component user="{{Auth::check()}}"></Videogame-component>
     
 @endsection

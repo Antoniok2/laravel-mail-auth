@@ -6,6 +6,7 @@
                     <th scope="col">Titolo</th>
                     <th scope="col">Sottotitolo</th>
                     <th scope="col">Rating</th>
+                    <th v-if="user">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -13,6 +14,7 @@
                     <td>{{ videogame.title }}</td>
                     <td>{{ videogame.subtitle }}</td>
                     <td>{{ videogame.rating }}</td>
+                    <td v-if="user">AZIONE</td>
                 </tr>
             </tbody>
         </table>
@@ -26,6 +28,9 @@
             return {
                 videogames: []
             };
+        },
+        props: {
+            user: String
         },
         mounted() {
             
