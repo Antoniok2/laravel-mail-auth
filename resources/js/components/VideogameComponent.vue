@@ -1,23 +1,37 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Titolo</th>
+                    <th scope="col">Sottotitolo</th>
+                    <th scope="col">Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="videogame in videogames" :key='videogame.id'>
+                    <td>{{ videogame.title }}</td>
+                    <td>{{ videogame.subtitle }}</td>
+                    <td>{{ videogame.rating }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
 <script>
     export default {
+        data: function() {
+
+            return {
+                videogames: []
+            };
+        },
         mounted() {
-            console.log('Component mounted.')
+            
+            axios.get('api/list/videogame')
+                 .then(r => this.videogames = r.data)
+                 .catch(e => console.error(e));
         }
     }
 </script>
