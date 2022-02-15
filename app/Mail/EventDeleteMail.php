@@ -11,9 +11,11 @@ class EventDeleteMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct()
+    public $videogame;
+
+    public function __construct($videogame)
     {
-        //
+        $this -> videogame = $videogame;
     }
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 use App\Videogame;
 use App\Mail\EventDeleteMail;
@@ -25,7 +26,10 @@ class ApiController extends Controller
 
         $videogame -> delete();
 
-        Mail::to('test@test.com') -> send(new EventDeleteMail());
+        // DOPO L'ELIMINAZIONE MANDO EMAIL ALL'UTENTE COLLEGATO
+        Mail::to(Auth::user() -> email ) -> send(new EventDeleteMail($videogame));
+        // ANCHE ALL'AMMINISTRATORE PER AVVISARLO
+        Mail::to('admin@gmail.com') -> send(new EventDeleteMail($videogame));
 
         return json_encode($videogame);
     }
